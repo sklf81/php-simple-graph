@@ -1,10 +1,12 @@
-#PHP Simple Graph
-##Introduction
+# PHP Simple Graph
+[img="graph.png"]
+
+## Introduction
 If you happen to own a webserver with php running on it as well and had the idea to graph your cpu_temperature or other data on your web-brower? Well, then this is the place for you!
 
 
 
-##Setup
+## Setup
 I'll show you the setup by an example
 make it stick, it's sick,
 play the sample ~
