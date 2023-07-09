@@ -1,0 +1,187 @@
+:root{
+	--wrapper_height: 900px;
+	--wrapper_width: 1800px;
+	--graph_margin: 100px;
+	--height_graph: calc(var(--wrapper_height) - 2 * var(--graph_margin));
+	--width_graph: calc(var(--wrapper_width) - 2 * var(--graph_margin));
+
+	--y_lines: 16;
+	--x_lines: 10;
+
+	--graph_wrapper_background: var(--color_60);
+
+	--bar_background: var(--color_30);
+	--bar_background_mouseover: var(--color_10);
+
+	--graph_background: var(--color_60);
+
+	--text_color: var(--color_5);
+
+	--axis_y_color: var(--color_5);
+	--axis_y_font: 8pt Consolas;
+
+	--axis_title_x_font: 10pt Consolas;
+	--axis_title_x_color: var(--color_5);
+
+	--title_font: bold 14pt Helvetica;
+	--title_color: var(--color_5);
+
+	--data_font: bold 10pt Helvetica;
+	--data_color: var(--color_5);
+
+	--data_length: 500;
+}
+
+body{
+	background-color: var(--stats-table-cell-background);
+}
+
+.graph_wrapper{
+	position: absolute;
+	left: calc(50% - calc(var(--wrapper_width)/2));
+	top: calc(50% - calc(var(--wrapper_height)/2));
+	display: grid;
+	grid-template-columns: 
+		var(--graph_margin)
+		var(--width_graph)
+		var(--graph_margin);
+	grid-template-rows: 
+		var(--graph_margin)
+		calc(var(--height_graph)/4)
+		calc(var(--height_graph)/4)
+		calc(var(--height_graph)/4)
+		calc(var(--height_graph)/4)
+		var(--graph_margin);
+ 	grid-gap: 0px;
+
+	height: var(--wrapper_height);
+	width: var(--wrapper_width);
+
+	filter: drop-shadow(0px 0px 4px #000000);
+}
+
+.graph{
+	display: grid;
+	grid-template-columns: repeat(var(--data_length), calc(100%/var(--data_length)));
+	grid-template-rows: 100%;
+	grid-gap: 0px;
+
+	grid-column: 2/3;
+	grid-row: 2/6;
+
+	height: var(--height_graph);
+	width: var(--width_graph);
+	z-index: 0;
+	
+	border-width: 1px;
+	border-color: white;
+	border-style: dotted;
+	background: var(--graph_background);
+}
+
+.axis_y, .graph_origin{
+	display: grid;
+	grid-column: 1/2;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+
+	text-align: center;
+	color: var(--axis_y_color);
+	font: var(--axis_y_font);
+	margin-top: -7px;
+}
+
+.graph_line_y{
+	z-index: 2;
+	position: absolute;
+	grid-column: 2/3;
+	height: 1px;
+	margin-top: calc(var(--height_graph)/var(--y_lines) - 1px);
+	width: 100%;
+	
+	border-top: dotted 1px white; 
+}
+
+.graph_line_x{
+	z-index: 2;
+	position: absolute;
+	grid-row: 2/6;
+	height: 100%;
+	width: 1px;
+	margin-right: calc(var(--width_graph)/var(--x_lines) - 1px);
+	
+	border-right: dotted 1px white; 
+}
+
+.axis_title_x{
+	display: grid;
+	position: relative;
+	grid-column: 2 / span 1;
+	grid-row: 6 / span 1;
+
+	height: var(--graph_margin);
+}
+
+.axis_title_x p{
+	text-align: center;
+	position: relative;
+	top: calc(var(--graph_margin)/4);
+	color: var(--axis_title_x_color);	
+	font: var(--axis_title_x_font);
+}
+
+.graph_bar{
+	z-index: 0;
+	display: grid;
+	position: relative;
+	grid-row: 1/2;
+	transform-origin: top left;
+	
+	width: auto;
+	padding: 0;
+
+	background: var(--bar_background);
+}
+
+.graph_bar[mouseover="true"]{
+	background: var(--bar_background_mouseover);
+	z-index: 3;
+}
+
+.bar_data{
+	display: grid;
+}
+
+.graph_header{
+	display: grid;
+	grid-column: 1 / 3;
+	grid-row: 1/ span 1;
+	grid-template-columns: 
+		100%;
+	grid-template-rows: 
+		50%
+		50%;
+ 	grid-gap: 0px;
+	height: var(--graph_margin);
+}
+
+.graph_title{
+	grid-column: 1 / 2;
+	grid-row: 1/ span 1;
+	height: 50px;
+
+	text-align: center;
+	color: var(--title_color);
+	font: var(--title_font);
+}
+
+.bar_data{
+	grid-column: 1 / 2;
+	grid-row: 2/ span 1;
+	height: calc(var(--graph_margin)/4);
+
+	text-align: center;
+	color: var(--data_color);
+	font: var(--data_font);
+}
